@@ -1,0 +1,38 @@
+= Lab 3 Cuda Fire Simulator
+
+== Compile
+
+to build:  make
+to clean up: make clean
+
+== Files
+
+  * main.cpp: main ParaVis program.  Creates a fireSimulatorKernel object,
+    and sets up ParaVis to run its update method
+    You should not have to modify this code.  If you change the size of
+    the world (N), then you may want to change the dimenstions passed
+    to dataVisiCUDA to change the window size.  There are some TODOs in
+    here that are just comments to you about some things you need to
+    update in your constructor for this code to get correct number of
+    iterations.
+
+
+  * firesimulator.[h,cu]:  starting point code to implement your solution.
+    This is where you will implement your solution.  You may want to
+    add data members to the fireSimulatorKernel class definitions, and
+    private method functions.
++
+The cuda kernels are written in a more C-like than {cpp}-like way.
+    Make sure to pass values to them as parameters vs. trying to turn
+    the cuda kernels into methods of the fireSimulatorKernel.
++
+If your simulation need multiple pieces of state per [i][j] element.
+    Use multiple 2D arrays of basic types allocated in CUDA memory rather
+    than trying to allocated a 2D array of structs and map thread into
+    that mess.  For example, if you need a float and an int value for
+    each [i][j] forest element use one array of floats and another array
+    of int values. Do not try to allocate one array of some struct type
+    with a float and int field.
+
+  * *.txt: some example input files you can run your firesimulator
+    on (write your own too):  ./firesimulator -f fire1.txt
